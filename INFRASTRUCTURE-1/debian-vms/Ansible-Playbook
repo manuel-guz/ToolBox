@@ -1,0 +1,9 @@
+---
+- name: Install Apache on all managed VMs
+  hosts: managed_vms
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present

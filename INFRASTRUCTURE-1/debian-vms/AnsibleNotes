@@ -1,0 +1,135 @@
+# ANSIBLE notes
+
+For ansible to manage the package download into the VMs, its necessary to  let the VMs to connect to internet and in between themself.
+ For this purpose its necessary to configure the VMs with a private network for intercommunication purposes and a public network to get access to internet.
+ To do this, the following commands needs to be written in the Vagrantfile:
+
+```
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "bento/debian-12"
+
+  (1..4).each do |i|
+   config.vm.define "debian_vm#{i}" do |vm|
+    vm.vm.hostname = "debian-vm#{i}"  
+  
+    vm.vm.network "private_network", type: "dhcp" #Priv network for inter-VM comm
+    vm.vm.network "public_network"  # This enables NAT by default.
+    vm.vm.provider "vmware_desktop" do |v|
+      v.memory = 512 # Adjust RAM for each VM
+      v.cpus = 1     # Adjust CPU cores
+    end
+  end
+end
+
+```
+
+Whit this vagtantfile 4 MVs are created whit private and public network, so them can connect to internet and in between.
+
+with the 4 VMs done, we connect to debian_VM1 and we install ansible:
+
+**1. Install Ansible on debian_vm1**
+
+1.	SSH into debian_vm1:
+
+ vagrant ssh debian_vm1
+
+	2.	Update the package list and install prerequisites:
+
+sudo apt update
+sudo apt install -y software-properties-common
+
+	3.	Add the Ansible PPA and install Ansible:
+
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install -y ansible
+
+	4.	Verify the installation:
+
+ansible --version
+
+**2. Configure Passwordless SSH Access to Other VMs**
+
+	1.	Generate an SSH key on debian_vm1 (if not already generated):
+
+ssh-keygen -t rsa -b 4096
+
+Press **Enter** for all prompts to use the default settings (the key will be saved in ~/.ssh/id_rsa).
+
+2.	Copy the public SSH key to the other VMs:
+
+ssh-copy-id vagrant@<ip_of_vm>
+
+Probably will be necessary to to check every VM ip login in each one and running the code ip adderss
+
+Repeat this step for debian_vm2, debian_vm3, and debian_vm4. Replace <ip_of_vm> with their private network IPs. The default username for Vagrant VMs is vagrant, and the default password is also vagrant.
+Example:
+
+ssh-copy-id [vagrant@192.168.56.102](mailto:vagrant@192.168.56.102)
+ssh-copy-id [vagrant@192.168.56.103](mailto:vagrant@192.168.56.103)
+ssh-copy-id [vagrant@192.168.56.104](mailto:vagrant@192.168.56.104)
+
+**3. Configure the Ansible Inventory File**
+
+1.	On debian_vm1, create an inventory file to define the other VMs:
+
+touch ~/ansible-inventory
+
+	2.	Add the following content (replace with the actual IPs of the VMs):
+
+[managed_vms]
+debian_vm2 ansible_host=192.168.56.102 ansible_user=vagrant
+debian_vm3 ansible_host=192.168.56.103 ansible_user=vagrant
+debian_vm4 ansible_host=192.168.56.104 ansible_user=vagrant
+
+Save the file and exit.
+
+---
+
+**4. Test Ansible Connectivity**
+
+1.	Run a simple Ansible ping command to test connectivity:
+
+ansible -i ~/ansible-inventory all -m ping
+
+	2.	You should see output like this for each of the VMs:
+
+debian_vm2 | SUCCESS => {
+"changed": false,
+"ping": "pong"
+}
+debian_vm3 | SUCCESS => {
+"changed": false,
+"ping": "pong"
+}
+debian_vm4 | SUCCESS => {
+"changed": false,
+"ping": "pong"
+}
+
+---
+
+**5. Running an Example Playbook to install apache2 in all MVs**
+
+1.	Create a sample playbook (e.g., ~/example-playbook.yml):
+
+---
+
+name: Install Apache on all managed VMs
+hosts: managed_vms
+become: yes
+tasks:
+    name: Install Apache
+    apt:
+      name: apache2
+      state: present
+
+	2.	Run the playbook in the VM1:
+
+ansible-playbook -i ~/ansible-inventory  ~/ansible_dir/playbook.yml
+
+First the lication of the inventory where all the VMs ip are, then the location of the playbook.
+
+	3.	Verify that Apache was installed by SSHing into any managed VM  in each VM:
+
+systemctl status apache2

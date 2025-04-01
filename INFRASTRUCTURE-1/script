@@ -1,0 +1,15 @@
+
+#/bin/zsh
+
+echo ' la primera linea del script debe  estar comentada con el shell a usar # $SHELL'
+echo ' luego de crear el script hayq ue darle el permiso de ejecucion chmod +x ./script '
+echo ' Este es mi primer script =)'
+
+echo ' estoy usando este shell'
+
+echo $SHELL
+
+echo 'en esta carpeta' 
+
+pwd
+

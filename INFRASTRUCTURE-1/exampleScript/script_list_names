@@ -1,0 +1,5 @@
+#!/bin/zsh
+for word in $(cat list_names)
+do
+echo $word
+done

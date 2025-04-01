@@ -1,0 +1,111 @@
+Important noter: to use vagrant a hypervisor is needed, using Mac ARM architecture is better to use MVware as hypervisor for compatibility purposes.
+ The correct version and free one is the VMware Fusion that is compatible with  M1 ARM.  Beyond that, a desktop plug in is necessary to let vagrant connect to the providers like virtualbox, mvware, hyperV, etc.
+
+After that, a package of utilities is required as well tu run and be able to connect everything together. Last thing to keep in mind is the vagrant
+ repository where we are going to download the vagrant boxs, called boxhub. We need to make sure that the box is compatible with arm architecture as well. 
+
+When initialising a vagrant box, try not to specify the version. iTerm may not understand the version as  it shows even when the prompt error suggest the
+ same version. If not specified, vagrant will use the last version available and probably the correct one.
+
+BOX FOR ARM ARCHITECTURE:
+
+                             vagrant init bento/debian-12 
+
+                       vagrant up --provider vmware_desktop
+
+ 
+
+Here the main points:
+
+Here’s a list of steps and things you likely did to troubleshoot and fix the compatibility issues between **Vagrant**, **VMware**, and **macOS M1 ARM**:
+
+**1. Installed VMware Fusion for macOS M1 ARM**
+
+•	VMware Fusion supports macOS M1 (ARM) architecture. You likely installed the **VMware Fusion Player** for Mac with M1 support.
+
+**2. Installed Vagrant**
+
+•	Installed **Vagrant** on your macOS M1 to manage and automate virtual machines.
+
+•	Used the command:
+
+brew install vagrant
+
+**3. Installed VMware Provider for Vagrant**
+
+•	To integrate **Vagrant** with **VMware Fusion**, you installed the **Vagrant VMware plugin** (vagrant-vmware-desktop).
+
+•	You also ensured that you had the **Vagrant VMware Utility** installed to make the integration work.
+
+**4. Installed the Vagrant VMware Utility**
+
+•	You downloaded and installed the **Vagrant VMware Utility**, which is required for VMware Fusion integration with Vagrant.
+
+•	You ran the installer to properly configure the certificates and access the VMware provider:
+
+https://www.vagrantup.com/docs/vmware/vagrant-vmware-utility.html
+
+**5. Fixed Missing Certificate Files**
+
+•	Encountered an error about the missing vagrant-utility.client.crt file.
+
+•	To resolve this, you reinstalled or reconfigured the **Vagrant VMware Utility** to ensure that the certificate was in the correct directory (/opt/vagrant-vmware-desktop/certificates).
+
+**6. Used a Compatible Vagrant Box for VMware**
+
+•	You verified and used a **compatible Vagrant box** that works with VMware Fusion, such as bento/debian-12.
+
+•	Ensured that the vagrant box was compatible with **ARM architecture** for your Mac M1.
+
+•	You used the correct command to add a box:
+
+vagrant box add bento/debian-12 --provider=vmware-fusion
+
+**7. Verified the Correct Box Version**
+
+•	Ensured the box version was available and matched the constraints you wanted.
+
+•	Corrected any version mismatch errors and ensured the box you were trying to use was available for VMware Fusion.
+
+**8. Configured the Provider in the Vagrantfile**
+
+•	Modified your Vagrantfile to specify VMware Fusion as the provider:
+
+Vagrant.configure("2") do |config|
+config.vm.box = "bento/debian-12"
+config.vm.box_version = "202502.21.0"
+config.vm.provider "vmware-fusion" do |vb|
+# Custom configurations for VMware Fusion
+end
+end
+
+**9. Destroyed Existing Machines and Reinitialized**
+
+•	You destroyed any previous machines that were created with incompatible providers (like VirtualBox) and reinitialized the environment with the correct provider (vmware-fusion).
+
+•	Command:
+
+vagrant destroy
+vagrant up --provider=vmware-fusion
+
+**10. Checked VM State with vagrant status**
+
+•	Used vagrant status to check if the VM was in the expected state (running or stopped).
+
+•	Resolved any issues where the VM wasn’t ready for SSH by verifying if the VM was correctly created and running.
+
+**11. Used vagrant ssh to Connect to the VM**
+
+•	After the VM was up and running, you used vagrant ssh to connect to the VM for further configuration.
+
+**12. Checked Network Configuration**
+
+•	You ensured that networking was properly configured (bridged, NAT, etc.) in VMware Fusion for proper communication with the VM.
+
+•	Checked the IP address of the VM to ensure that it was accessible for SSH and other operations.
+
+**13. Debugged VMware Errors**
+
+•	Encountered issues where the VM session was aborted and used commands to troubleshoot those errors.
+
+•	Verified VMware Fusion compatibility with your M1 Mac and ensured it was up-to-date.
