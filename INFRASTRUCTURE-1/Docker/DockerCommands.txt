@@ -1,0 +1,2180 @@
+
+
+
+
+
+#Exmple of a infrastructure of two containers, one running sql and connected to a private network ant the other one running Wordpress and connected to the same private network than the mysql container but also connected to a public network to be able to connect to internet. Port 8081:80 opened in host. So with Docker network inspect public, we find the Wordpress container with the ip that its reachable from the browser.
+
+
+
+
+
+
+Last login: Fri Mar 21 15:35:34 on ttys000
+➜  ~ vagrant ssh debian_vm3
+A Vagrant environment or target machine is required to run this
+command. Run `vagrant init` to create a new Vagrant environment. Or,
+get an ID of a target machine from `vagrant global-status` to run
+this command on. A final option is to change to a directory with a
+Vagrantfile and to try again.
+➜  ~ vagrant status
+A Vagrant environment or target machine is required to run this
+command. Run `vagrant init` to create a new Vagrant environment. Or,
+get an ID of a target machine from `vagrant global-status` to run
+this command on. A final option is to change to a directory with a
+Vagrantfile and to try again.
+➜  ~ ls
+Applications               Movies
+Creative Cloud Files       Music
+Desktop                    Pictures
+Documents                  Public
+Downloads                  Virtual Machines.localized
+Google Drive               VirtualBox VMs
+Library
+➜  ~ cd Desktop 
+➜  Desktop cd Prog 
+➜  Prog git:(master) ✗ ls
+DH                  DH Australia        DigitalHouse-course
+➜  Prog git:(master) ✗ cd DH\ Australia 
+➜  DH Australia git:(master) ✗ ls
+Infraestructura 1     java
+Objects.js            overView_functions.js
+➜  DH Australia git:(master) ✗ cd Infraestructura\ 1 
+➜  Infraestructura 1 git:(master) ✗ ls
+Vagrant       prueba.txt    script
+exampleScript python        script2
+➜  Infraestructura 1 git:(master) ✗ cd Vagrant 
+➜  Vagrant git:(master) ✗ ls
+SSHVagrantWapache2    Vagrantfile           vagrantfile example 1
+➜  Vagrant git:(master) ✗ vagrant status
+Current machine states:
+
+default                   not created (vmware_desktop)
+
+The VMware machine has not yet been created. Run `vagrant up`
+to create the machine. If a machine is not created, only the
+default provider will be shown. Therefore, if a provider is not listed,
+then the machine is not created for that provider.
+➜  Vagrant git:(master) ✗ ls
+SSHVagrantWapache2    Vagrantfile           vagrantfile example 1
+➜  Vagrant git:(master) ✗ cd ..
+➜  Infraestructura 1 git:(master) ✗ ls
+Vagrant       prueba.txt    script
+exampleScript python        script2
+➜  Infraestructura 1 git:(master) ✗ cd ..
+➜  DH Australia git:(master) ✗ cd .
+➜  DH Australia git:(master) ✗ cd.
+zsh: command not found: cd.
+➜  DH Australia git:(master) ✗ cd..
+zsh: command not found: cd..
+➜  DH Australia git:(master) ✗ cd..
+zsh: command not found: cd..
+➜  DH Australia git:(master) ✗ cd ..
+➜  Prog git:(master) ✗ cd ..
+➜  Desktop ls
+Final gate    NOWHERE.pages ToDrive       debian-vms    ultimo CDR
+Linkedin      Prog          Touch T7-MAC  extras
+➜  Desktop cd debian-vms 
+➜  debian-vms ls
+Vagrantfile
+➜  debian-vms devian status
+zsh: command not found: devian
+➜  debian-vms vagrant status
+Current machine states:
+
+debian_vm1                running (vmware_desktop)
+debian_vm2                running (vmware_desktop)
+debian_vm3                running (vmware_desktop)
+debian_vm4                running (vmware_desktop)
+
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run `vagrant status NAME`.
+➜  debian-vms vagrant ssh debian_vm3
+Linux debian-vm3 6.1.0-31-arm64 #1 SMP Debian 6.1.128-1 (2025-02-07) aarch64
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+
+Use of this system is acceptance of the OS vendor EULA and License Agreements.
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+vagrant@debian-vm3:~$ ip address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:c4:1c:1b brd ff:ff:ff:ff:ff:ff
+    altname enp2s0
+    altname ens160
+    inet 192.168.230.134/24 brd 192.168.230.255 scope global dynamic eth0
+       valid_lft 1546sec preferred_lft 1546sec
+    inet6 fe80::20c:29ff:fec4:1c1b/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:c4:1c:25 brd ff:ff:ff:ff:ff:ff
+    altname enp18s0
+    altname ens224
+    inet 192.168.228.130/24 brd 192.168.228.255 scope global dynamic eth1
+       valid_lft 1709sec preferred_lft 1709sec
+    inet6 fe80::20c:29ff:fec4:1c25/64 scope link 
+       valid_lft forever preferred_lft forever
+vagrant@debian-vm3:~$ exit
+logout
+➜  debian-vms vagrant ssh debian_vm4
+Linux debian-vm4 6.1.0-31-arm64 #1 SMP Debian 6.1.128-1 (2025-02-07) aarch64
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+
+Use of this system is acceptance of the OS vendor EULA and License Agreements.
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+vagrant@debian-vm4:~$ ip address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:46:02:1f brd ff:ff:ff:ff:ff:ff
+    altname enp2s0
+    altname ens160
+    inet 192.168.230.135/24 brd 192.168.230.255 scope global dynamic eth0
+       valid_lft 1662sec preferred_lft 1662sec
+    inet6 fe80::20c:29ff:fe46:21f/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:46:02:29 brd ff:ff:ff:ff:ff:ff
+    altname enp18s0
+    altname ens224
+    inet 192.168.228.131/24 brd 192.168.228.255 scope global dynamic eth1
+       valid_lft 1630sec preferred_lft 1630sec
+    inet6 fe80::20c:29ff:fe46:229/64 scope link 
+       valid_lft forever preferred_lft forever
+vagrant@debian-vm4:~$ cConnection to 127.0.0.1 closed by remote host.
+➜  debian-vms vagrant ssh debian_vm2
+Linux debian-vm2 6.1.0-31-arm64 #1 SMP Debian 6.1.128-1 (2025-02-07) aarch64
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+
+Use of this system is acceptance of the OS vendor EULA and License Agreements.
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Mar 29 00:14:20 2025 from 192.168.230.1
+vagrant@debian-vm2:~$ ip address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:1e:9a:71 brd ff:ff:ff:ff:ff:ff
+    altname enp2s0
+    altname ens160
+    inet 192.168.230.133/24 brd 192.168.230.255 scope global dynamic eth0
+       valid_lft 1197sec preferred_lft 1197sec
+    inet6 fe80::20c:29ff:fe1e:9a71/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:1e:9a:7b brd ff:ff:ff:ff:ff:ff
+    altname enp18s0
+    altname ens224
+    inet 192.168.228.129/24 brd 192.168.228.255 scope global dynamic eth1
+       valid_lft 1419sec preferred_lft 1419sec
+    inet6 fe80::20c:29ff:fe1e:9a7b/64 scope link 
+       valid_lft forever preferred_lft forever
+vagrant@debian-vm2:~$ 
+Broadcast message from root@debian-12 (Sat 2025-03-29 05:08:38 UTC):
+
+The system will power off now!
+
+Connection to 127.0.0.1 closed by remote host.
+➜  debian-vms 
+➜  debian-vms 
+➜  debian-vms 
+➜  debian-vms vagrant ssh debian_vm2
+Linux debian-vm2 6.1.0-31-arm64 #1 SMP Debian 6.1.128-1 (2025-02-07) aarch64
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+
+Use of this system is acceptance of the OS vendor EULA and License Agreements.
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Mar 29 05:14:39 2025 from 192.168.230.132
+vagrant@debian-vm2:~$ dpkg -l | grep apache2
+ii  apache2                        2.4.62-1~deb12u2               arm64        Apache HTTP Server
+ii  apache2-bin                    2.4.62-1~deb12u2               arm64        Apache HTTP Server (modules and other binary files)
+ii  apache2-data                   2.4.62-1~deb12u2               all          Apache HTTP Server (common files)
+ii  apache2-utils                  2.4.62-1~deb12u2               arm64        Apache HTTP Server (utility programs for web servers)
+vagrant@debian-vm2:~$ systemctl list-units --type=service | grep apache
+  apache-htcacheclean.service                                                               loaded active running Disk Cache Cleaning Daemon for Apache HTTP Server
+  apache2.service                                                                           loaded active running The Apache HTTP Server
+vagrant@debian-vm2:~$ systemctl status apache2
+● apache2.service - The Apache HTTP Server
+     Loaded: loaded (/lib/systemd/system/apache2.service; enabled; preset: enabled)
+     Active: active (running) since Sat 2025-03-29 05:14:46 UTC; 5min ago
+       Docs: https://httpd.apache.org/docs/2.4/
+   Main PID: 2045 (apache2)
+      Tasks: 55 (limit: 442)
+     Memory: 4.8M
+        CPU: 54ms
+     CGroup: /system.slice/apache2.service
+             ├─2045 /usr/sbin/apache2 -k start
+             ├─2047 /usr/sbin/apache2 -k start
+             └─2048 /usr/sbin/apache2 -k start
+vagrant@debian-vm2:~$ ip addres
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:1e:9a:71 brd ff:ff:ff:ff:ff:ff
+    altname enp2s0
+    altname ens160
+    inet 192.168.230.133/24 brd 192.168.230.255 scope global dynamic eth0
+       valid_lft 998sec preferred_lft 998sec
+    inet6 fe80::20c:29ff:fe1e:9a71/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:1e:9a:7b brd ff:ff:ff:ff:ff:ff
+    altname enp18s0
+    altname ens224
+    inet 192.168.228.129/24 brd 192.168.228.255 scope global dynamic eth1
+       valid_lft 1028sec preferred_lft 1028sec
+    inet6 fe80::20c:29ff:fe1e:9a7b/64 scope link 
+       valid_lft forever preferred_lft forever
+4: eth2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:1e:9a:85 brd ff:ff:ff:ff:ff:ff
+    altname enp26s0
+    altname ens256
+    inet 172.20.10.12/28 brd 172.20.10.15 scope global dynamic eth2
+       valid_lft 2828sec preferred_lft 2828sec
+    inet6 fe80::20c:29ff:fe1e:9a85/64 scope link 
+       valid_lft forever preferred_lft forever
+vagrant@debian-vm2:~$ systemctl status apache2
+● apache2.service - The Apache HTTP Server
+     Loaded: loaded (/lib/systemd/system/apache2.service; enabled; preset: enabled)
+     Active: active (running) since Sat 2025-03-29 05:14:46 UTC; 13min ago
+       Docs: https://httpd.apache.org/docs/2.4/
+   Main PID: 2045 (apache2)
+      Tasks: 55 (limit: 442)
+     Memory: 5.0M
+        CPU: 138ms
+     CGroup: /system.slice/apache2.service
+             ├─2045 /usr/sbin/apache2 -k start
+             ├─2047 /usr/sbin/apache2 -k start
+             └─2048 /usr/sbin/apache2 -k start
+vagrant@debian-vm2:~$ Connection to 127.0.0.1 closed by remote host.
+➜  debian-vms ping192.168.230.133
+zsh: command not found: ping192.168.230.133
+➜  debian-vms ping 192.168.230.133
+PING 192.168.230.133 (192.168.230.133): 56 data bytes
+Request timeout for icmp_seq 0
+Request timeout for icmp_seq 1
+Request timeout for icmp_seq 2
+Request timeout for icmp_seq 3
+ping: sendto: No route to host
+Request timeout for icmp_seq 4
+ping: sendto: Host is down
+Request timeout for icmp_seq 5
+ping: sendto: Host is down
+Request timeout for icmp_seq 6
+^C
+--- 192.168.230.133 ping statistics ---
+8 packets transmitted, 0 packets received, 100.0% packet loss
+➜  debian-vms vagrant status
+Current machine states:
+
+debian_vm1                running (vmware_desktop)
+debian_vm2                running (vmware_desktop)
+debian_vm3                running (vmware_desktop)
+debian_vm4                running (vmware_desktop)
+
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run `vagrant status NAME`.
+➜  debian-vms ls
+Vagrantfile
+➜  debian-vms nano Vagrantfile 
+➜  debian-vms vagrant reload
+==> debian_vm1: Attempting graceful shutdown of VM...
+==> debian_vm1: Checking if box 'bento/debian-12' version '202502.21.0' is up to date...
+==> debian_vm1: Verifying vmnet devices are healthy...
+==> debian_vm1: Preparing network adapters...
+WARNING: The VMX file for this box contains a setting that is automatically overwritten by Vagrant
+WARNING: when started. Vagrant will stop overwriting this setting in an upcoming release which may
+WARNING: prevent proper networking setup. Below is the detected VMX setting:
+WARNING: 
+WARNING:   ethernet2.pcislotnumber = "256"
+WARNING: 
+WARNING: If networking fails to properly configure, it may require this VMX setting. It can be manually
+WARNING: applied via the Vagrantfile:
+WARNING: 
+WARNING:   Vagrant.configure(2) do |config|
+WARNING:     config.vm.provider :vmware_desktop do |vmware|
+WARNING:       vmware.vmx["ethernet2.pcislotnumber"] = "256"
+WARNING:     end
+WARNING:   end
+WARNING: 
+WARNING: For more information: https://www.vagrantup.com/docs/vmware/boxes.html#vmx-allowlisting
+==> debian_vm1: Starting the VMware VM...
+==> debian_vm1: Waiting for the VM to receive an address...
+==> debian_vm1: Forwarding ports...
+    debian_vm1: -- 22 => 2222
+==> debian_vm1: Waiting for machine to boot. This may take a few minutes...
+    debian_vm1: SSH address: 127.0.0.1:2222
+    debian_vm1: SSH username: vagrant
+    debian_vm1: SSH auth method: private key
+==> debian_vm1: Machine booted and ready!
+==> debian_vm1: Setting hostname...
+==> debian_vm1: Configuring network adapters within the VM...
+==> debian_vm1: Waiting for HGFS to become available...
+==> debian_vm1: Enabling and configuring shared folders...
+    debian_vm1: -- /Users/janoguz/Desktop/debian-vms: /vagrant
+==> debian_vm1: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> debian_vm1: flag to force provisioning. Provisioners marked to run always will still run.
+==> debian_vm2: Attempting graceful shutdown of VM...
+==> debian_vm2: Checking if box 'bento/debian-12' version '202502.21.0' is up to date...
+==> debian_vm2: Verifying vmnet devices are healthy...
+==> debian_vm2: Preparing network adapters...
+WARNING: The VMX file for this box contains a setting that is automatically overwritten by Vagrant
+WARNING: when started. Vagrant will stop overwriting this setting in an upcoming release which may
+WARNING: prevent proper networking setup. Below is the detected VMX setting:
+WARNING: 
+WARNING:   ethernet2.pcislotnumber = "256"
+WARNING: 
+WARNING: If networking fails to properly configure, it may require this VMX setting. It can be manually
+WARNING: applied via the Vagrantfile:
+WARNING: 
+WARNING:   Vagrant.configure(2) do |config|
+WARNING:     config.vm.provider :vmware_desktop do |vmware|
+WARNING:       vmware.vmx["ethernet2.pcislotnumber"] = "256"
+WARNING:     end
+WARNING:   end
+WARNING: 
+WARNING: For more information: https://www.vagrantup.com/docs/vmware/boxes.html#vmx-allowlisting
+==> debian_vm2: Fixed port collision for 22 => 2222. Now on port 2200.
+==> debian_vm2: Starting the VMware VM...
+==> debian_vm2: Waiting for the VM to receive an address...
+==> debian_vm2: Forwarding ports...
+    debian_vm2: -- 22 => 2200
+==> debian_vm2: Waiting for machine to boot. This may take a few minutes...
+    debian_vm2: SSH address: 127.0.0.1:2200
+    debian_vm2: SSH username: vagrant
+    debian_vm2: SSH auth method: private key
+==> debian_vm2: Machine booted and ready!
+==> debian_vm2: Setting hostname...
+==> debian_vm2: Configuring network adapters within the VM...
+==> debian_vm2: Waiting for HGFS to become available...
+==> debian_vm2: Enabling and configuring shared folders...
+    debian_vm2: -- /Users/janoguz/Desktop/debian-vms: /vagrant
+==> debian_vm2: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> debian_vm2: flag to force provisioning. Provisioners marked to run always will still run.
+==> debian_vm3: Attempting graceful shutdown of VM...
+==> debian_vm3: Checking if box 'bento/debian-12' version '202502.21.0' is up to date...
+==> debian_vm3: Verifying vmnet devices are healthy...
+==> debian_vm3: Preparing network adapters...
+WARNING: The VMX file for this box contains a setting that is automatically overwritten by Vagrant
+WARNING: when started. Vagrant will stop overwriting this setting in an upcoming release which may
+WARNING: prevent proper networking setup. Below is the detected VMX setting:
+WARNING: 
+WARNING:   ethernet2.pcislotnumber = "256"
+WARNING: 
+WARNING: If networking fails to properly configure, it may require this VMX setting. It can be manually
+WARNING: applied via the Vagrantfile:
+WARNING: 
+WARNING:   Vagrant.configure(2) do |config|
+WARNING:     config.vm.provider :vmware_desktop do |vmware|
+WARNING:       vmware.vmx["ethernet2.pcislotnumber"] = "256"
+WARNING:     end
+WARNING:   end
+WARNING: 
+WARNING: For more information: https://www.vagrantup.com/docs/vmware/boxes.html#vmx-allowlisting
+==> debian_vm3: Fixed port collision for 22 => 2222. Now on port 2201.
+==> debian_vm3: Starting the VMware VM...
+==> debian_vm3: Waiting for the VM to receive an address...
+==> debian_vm3: Forwarding ports...
+    debian_vm3: -- 22 => 2201
+==> debian_vm3: Waiting for machine to boot. This may take a few minutes...
+    debian_vm3: SSH address: 127.0.0.1:2201
+    debian_vm3: SSH username: vagrant
+    debian_vm3: SSH auth method: private key
+==> debian_vm3: Machine booted and ready!
+==> debian_vm3: Setting hostname...
+==> debian_vm3: Configuring network adapters within the VM...
+==> debian_vm3: Waiting for HGFS to become available...
+==> debian_vm3: Enabling and configuring shared folders...
+    debian_vm3: -- /Users/janoguz/Desktop/debian-vms: /vagrant
+==> debian_vm3: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> debian_vm3: flag to force provisioning. Provisioners marked to run always will still run.
+==> debian_vm4: Attempting graceful shutdown of VM...
+==> debian_vm4: Checking if box 'bento/debian-12' version '202502.21.0' is up to date...
+==> debian_vm4: Verifying vmnet devices are healthy...
+==> debian_vm4: Preparing network adapters...
+WARNING: The VMX file for this box contains a setting that is automatically overwritten by Vagrant
+WARNING: when started. Vagrant will stop overwriting this setting in an upcoming release which may
+WARNING: prevent proper networking setup. Below is the detected VMX setting:
+WARNING: 
+WARNING:   ethernet2.pcislotnumber = "256"
+WARNING: 
+WARNING: If networking fails to properly configure, it may require this VMX setting. It can be manually
+WARNING: applied via the Vagrantfile:
+WARNING: 
+WARNING:   Vagrant.configure(2) do |config|
+WARNING:     config.vm.provider :vmware_desktop do |vmware|
+WARNING:       vmware.vmx["ethernet2.pcislotnumber"] = "256"
+WARNING:     end
+WARNING:   end
+WARNING: 
+WARNING: For more information: https://www.vagrantup.com/docs/vmware/boxes.html#vmx-allowlisting
+==> debian_vm4: Fixed port collision for 22 => 2222. Now on port 2202.
+==> debian_vm4: Starting the VMware VM...
+==> debian_vm4: Waiting for the VM to receive an address...
+==> debian_vm4: Forwarding ports...
+    debian_vm4: -- 22 => 2202
+==> debian_vm4: Waiting for machine to boot. This may take a few minutes...
+    debian_vm4: SSH address: 127.0.0.1:2202
+    debian_vm4: SSH username: vagrant
+    debian_vm4: SSH auth method: private key
+==> debian_vm4: Machine booted and ready!
+==> debian_vm4: Setting hostname...
+==> debian_vm4: Configuring network adapters within the VM...
+==> debian_vm4: Waiting for HGFS to become available...
+==> debian_vm4: Enabling and configuring shared folders...
+    debian_vm4: -- /Users/janoguz/Desktop/debian-vms: /vagrant
+==> debian_vm4: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> debian_vm4: flag to force provisioning. Provisioners marked to run always will still run.
+➜  debian-vms sudo ufw allow 80/tcp
+Password:
+sudo: a password is required
+➜  debian-vms pwd
+/Users/janoguz/Desktop/debian-vms
+➜  debian-vms vagrant statud
+Usage: vagrant [options] <command> [<args>]
+
+    -h, --help                       Print this help.
+
+Common commands:
+     autocomplete    manages autocomplete installation on host
+     box             manages boxes: installation, removal, etc.
+     cloud           manages everything related to Vagrant Cloud
+     destroy         stops and deletes all traces of the vagrant machine
+     global-status   outputs status Vagrant environments for this user
+     halt            stops the vagrant machine
+     help            shows the help for a subcommand
+     init            initializes a new Vagrant environment by creating a Vagrantfile
+     login           
+     package         packages a running vagrant environment into a box
+     plugin          manages plugins: install, uninstall, update, etc.
+     port            displays information about guest port mappings
+     powershell      connects to machine via powershell remoting
+     provision       provisions the vagrant machine
+     push            deploys code in this environment to a configured destination
+     rdp             connects to machine via RDP
+     reload          restarts vagrant machine, loads new Vagrantfile configuration
+     resume          resume a suspended vagrant machine
+     serve           start Vagrant server
+     snapshot        manages snapshots: saving, restoring, etc.
+     ssh             connects to machine via SSH
+     ssh-config      outputs OpenSSH valid configuration to connect to the machine
+     status          outputs status of the vagrant machine
+     suspend         suspends the machine
+     up              starts and provisions the vagrant environment
+     upload          upload to machine via communicator
+     validate        validates the Vagrantfile
+     version         prints current and latest Vagrant version
+     winrm           executes commands on a machine via WinRM
+     winrm-config    outputs WinRM configuration to connect to the machine
+
+For help on any individual command run `vagrant COMMAND -h`
+
+Additional subcommands are available, but are either more advanced
+or not commonly used. To see all subcommands, run the command
+`vagrant list-commands`.
+        --[no-]color                 Enable or disable color output
+        --machine-readable           Enable machine readable output
+    -v, --version                    Display Vagrant version
+        --debug                      Enable debug output
+        --timestamp                  Enable timestamps on log output
+        --debug-timestamp            Enable debug output with timestamps
+        --no-tty                     Enable non-interactive output
+
+➜  debian-vms vagrant status    
+Current machine states:
+
+debian_vm1                not created (vmware_desktop)
+debian_vm2                not created (vmware_desktop)
+debian_vm3                not created (vmware_desktop)
+debian_vm4                not created (vmware_desktop)
+
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run `vagrant status NAME`.
+➜  debian-vms ls
+Vagrantfile
+➜  debian-vms git config --global credential.helper
+➜  debian-vms git:(main) cd .
+➜  debian-vms git:(main) ✗ cd ./
+➜  debian-vms git:(main) ✗ cd /
+➜  / 
+➜  / 
+➜  / docker --version
+Docker version 20.10.21, build baeda1f
+➜  / 
+➜  / 
+➜  / docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker pull amd64/alpine
+Using default tag: latest
+latest: Pulling from amd64/alpine
+no matching manifest for linux/arm64/v8 in the manifest list entries
+➜  / docker pull --platform=linux/amd64 alpine
+Using default tag: latest
+latest: Pulling from library/alpine
+f18232174bc9: Pull complete 
+Digest: sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+➜  / 
+➜  / docker pull  alpine                      
+Using default tag: latest
+latest: Pulling from library/alpine
+6e771e15690e: Pull complete 
+Digest: sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+➜  / docler ls
+zsh: command not found: docler
+➜  / docker ls
+docker: 'ls' is not a docker command.
+See 'docker --help'
+➜  / docker list
+docker: 'list' is not a docker command.
+See 'docker --help'
+➜  / docker -h  
+Flag shorthand -h has been deprecated, please use --help
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "/Users/janoguz/.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "/Users/janoguz/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "/Users/janoguz/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "/Users/janoguz/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx (Docker Inc., v0.9.1)
+  compose*    Docker Compose (Docker Inc., v2.12.2)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  dev*        Docker Dev Environments (Docker Inc., v0.0.3)
+  extension*  Manages Docker extensions (Docker Inc., v0.2.13)
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  sbom*       View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc., 0.6.0)
+  scan*       Docker Scan (Docker Inc., v0.21.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+➜  / docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+alpine       <none>    aded1e1a5b37   6 weeks ago   7.83MB
+alpine       latest    8d591b0b7dea   6 weeks ago   8.17MB
+➜  / cocker run alpine
+zsh: command not found: cocker
+➜  / docker run alpine
+➜  / docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps -a
+CONTAINER ID   IMAGE     COMMAND     CREATED          STATUS                      PORTS     NAMES
+95d81deca155   alpine    "/bin/sh"   42 seconds ago   Exited (0) 41 seconds ago             friendly_torvalds
+➜  / docker rm 95
+95
+➜  / docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps   
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker image ls  
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+alpine       latest    8d591b0b7dea   6 weeks ago   8.17MB
+alpine       <none>    aded1e1a5b37   6 weeks ago   7.83MB
+➜  / docker rmi alpine
+Untagged: alpine:latest
+Deleted: sha256:8d591b0b7dea080ea3be9e12ae563eebf9869168ffced1cb25b2470a3d9fe15e
+Deleted: sha256:a16e98724c05975ee8c40d8fe389c3481373d34ab20a1cf52ea2accc43f71f4c
+➜  / docker image ls  
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+alpine       <none>    aded1e1a5b37   6 weeks ago   7.83MB
+➜  / docker rmi alpine
+Error: No such image: alpine
+➜  / docker rmi aded  
+Untagged: alpine@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
+Deleted: sha256:aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b
+Deleted: sha256:08000c18d16dadf9553d747a58cf44023423a9ab010aab96cf263d2216b8b350
+➜  / docker image ls  
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+➜  / docker pull al[pine
+zsh: bad pattern: al[pine
+➜  / docker pull alpine 
+Using default tag: latest
+latest: Pulling from library/alpine
+6e771e15690e: Pull complete 
+Digest: sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+➜  / 
+➜  / 
+➜  / docker images ls
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+➜  / docker images ls -a
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+➜  / docker images      
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+alpine       latest    8d591b0b7dea   6 weeks ago   8.17MB
+➜  / docker images list
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+➜  / docker images     
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+alpine       latest    8d591b0b7dea   6 weeks ago   8.17MB
+➜  / docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+e748403dc2f1   bridge    bridge    local
+9ecc94d6b406   host      host      local
+4aa8cc93504d   none      null      local
+➜  / docker network create public
+960491ed5678180f9e99684ca044391749fcf27093899487be9d2877e0a95d6d
+➜  / docker network create internal
+085e6819f7337eead8e2ed420b66924f668ce0f02295c6e45633e64e054f2364
+➜  / docker network ls             
+NETWORK ID     NAME       DRIVER    SCOPE
+e748403dc2f1   bridge     bridge    local
+9ecc94d6b406   host       host      local
+085e6819f733   internal   bridge    local
+4aa8cc93504d   none       null      local
+960491ed5678   public     bridge    local
+➜  / docker rm network internal
+Error: No such container: network
+Error: No such container: internal
+➜  / docker network rm internal
+internal
+➜  / docker network ls         
+NETWORK ID     NAME      DRIVER    SCOPE
+e748403dc2f1   bridge    bridge    local
+9ecc94d6b406   host      host      local
+4aa8cc93504d   none      null      local
+960491ed5678   public    bridge    local
+➜  / docker network create --internal internal
+c159cbb594a55a80f73d159d77aa93a973db358a75a6ff4d7dc3a29b3efe2e69
+➜  / docker network ls                        
+NETWORK ID     NAME       DRIVER    SCOPE
+e748403dc2f1   bridge     bridge    local
+9ecc94d6b406   host       host      local
+c159cbb594a5   internal   bridge    local
+4aa8cc93504d   none       null      local
+960491ed5678   public     bridge    local
+➜  / docker network rm internal               
+internal
+➜  / docker network ls         
+NETWORK ID     NAME      DRIVER    SCOPE
+e748403dc2f1   bridge    bridge    local
+9ecc94d6b406   host      host      local
+4aa8cc93504d   none      null      local
+960491ed5678   public    bridge    local
+➜  / docker network create internal --internal
+01c9a9745a17053a1a67b9563d6cd561305a16dc499f3469eb832c7396c60c82
+➜  / docker network ls                        
+NETWORK ID     NAME       DRIVER    SCOPE
+e748403dc2f1   bridge     bridge    local
+9ecc94d6b406   host       host      local
+01c9a9745a17   internal   bridge    local
+4aa8cc93504d   none       null      local
+960491ed5678   public     bridge    local
+➜  / Prevents external access, allowing                                                
+zsh: command not found: Prevents
+➜  / 
+➜  / 
+➜  / Prevents external access, allowing only internal communication between containers.
+zsh: command not found: Prevents
+➜  / 
+➜  / docker pull mysql
+Using default tag: latest
+latest: Pulling from library/mysql
+fa07288abb8b: Pull complete 
+0a1d246ada2d: Pull complete 
+403da7fd01e2: Pull complete 
+8c0d86ac38d6: Pull complete 
+25df6f366614: Pull complete 
+19736db5e517: Pull complete 
+272f6449e9f1: Pull complete 
+1ddc2126e5fd: Pull complete 
+fa861cc3c4c4: Pull complete 
+735441d7e64a: Pull complete 
+Digest: sha256:0596fa224cdf3b3355ce3ddbfd7ce77be27ec9e51841dfc5d2e1c8b81eea69d2
+Status: Downloaded newer image for mysql:latest
+docker.io/library/mysql:latest
+➜  / docker pull WordPress
+invalid reference format: repository name must be lowercase
+➜  / docker pull wordpress
+Using default tag: latest
+latest: Pulling from library/wordpress
+d9b636547744: Pull complete 
+b845448e3a2f: Pull complete 
+6e86d7f22c74: Pull complete 
+9244afd9af6f: Pull complete 
+d32d0840fada: Pull complete 
+b804945c1dd8: Pull complete 
+164548c32da3: Pull complete 
+273b67560753: Pull complete 
+d2a0631a51c1: Pull complete 
+5d8e46541d77: Pull complete 
+7a1485cd9473: Pull complete 
+c2fab834b59a: Pull complete 
+d863ca5eaaea: Pull complete 
+4f4fb700ef54: Pull complete 
+609c0d3c85cf: Pull complete 
+4d4850bd0c82: Pull complete 
+1e0a3e9f510e: Pull complete 
+3b2aee824f4c: Pull complete 
+2b353139d238: Pull complete 
+7a318e2d5823: Pull complete 
+f8ec2887ac91: Pull complete 
+ce447737cb44: Pull complete 
+Digest: sha256:8b0ffd461bfaf8e74ab98481f45d1b2596986767faf2dc65bb47c875076f8a14
+Status: Downloaded newer image for wordpress:latest
+docker.io/library/wordpress:latest
+➜  / docker image         
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+➜  / docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+alpine       latest    8d591b0b7dea   6 weeks ago    8.17MB
+wordpress    latest    ae04ed0bf053   7 weeks ago    697MB
+mysql        latest    2700d94f59a8   2 months ago   814MB
+➜  / cker run -d --name db --network internal
+zsh: command not found: cker
+➜  / docker run -d --name db --network internal
+"docker run" requires at least 1 argument.
+See 'docker run --help'.
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+➜  / docker ps                                 
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  /             
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / docker images                             
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+alpine       latest    8d591b0b7dea   6 weeks ago    8.17MB
+wordpress    latest    ae04ed0bf053   7 weeks ago    697MB
+mysql        latest    2700d94f59a8   2 months ago   814MB
+➜  / docker run -d --name mysql --network internal
+"docker run" requires at least 1 argument.
+See 'docker run --help'.
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+➜  / docker run -d --name mysql --network internal
+"docker run" requires at least 1 argument.
+See 'docker run --help'.
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+➜  / docker run -d --name db --network internal\ -edocker run -d --name db --network internal \
+-e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_USER=wpuser \
+-e MYSQL_PASSWORD=my-secret-pw \
+-e MYSQL_DATABASE=wordpressdb \
+mysql:5.7
+Unable to find image 'run:latest' locally
+docker: Error response from daemon: pull access denied for run, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+➜  / docker run -d --name db --network internal\ -edocker run -d --name db --network internal \
+-e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_USER=wpuser \
+-e MYSQL_PASSWORD=my-secret-pw \
+-e MYSQL_DATABASE=wordpressdb \
+mysql    
+Unable to find image 'run:latest' locally
+docker: Error response from daemon: pull access denied for run, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+➜  / docker run -d --name db --network internal\ -e docker run -d --name db --network internal \
+-e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_USER=wpuser \
+-e MYSQL_PASSWORD=my-secret-pw \
+-e MYSQL_DATABASE=wordpressdb \
+mysql
+Unable to find image 'docker:latest' locally
+latest: Pulling from library/docker
+6e771e15690e: Already exists 
+d61622ecb2ce: Pull complete 
+4f4fb700ef54: Pull complete 
+d16494c114cd: Pull complete 
+c77aa33f5637: Pull complete 
+c4d053f9df94: Pull complete 
+9ebaf976d730: Pull complete 
+fafb520adbb1: Pull complete 
+69c95f1d6a23: Pull complete 
+6fd63d1a1ff0: Pull complete 
+2bd0d76ef0d3: Pull complete 
+457ddb316d36: Pull complete 
+58a224a01ea8: Pull complete 
+b998ffd0151b: Pull complete 
+a6b5f37bae6e: Pull complete 
+b9acc67c8042: Pull complete 
+Digest: sha256:4924fece44d61eeec47f619a4c35cd70fa2a31cd36b6283943a122369549fb82
+Status: Downloaded newer image for docker:latest
+dd00085dc61b6e5945d67d2ff1cd4c0a72fe722d177284d5d2286eeea77d7bf6
+docker: Error response from daemon: network internal -e not found.
+➜  / docker run -d --name db --network internal \
+-e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_USER=wpuser \
+-e MYSQL_PASSWORD=my-secret-pw \
+-e MYSQL_DATABASE=wordpressdb \
+mysql    
+docker: Error response from daemon: Conflict. The container name "/db" is already in use by container "dd00085dc61b6e5945d67d2ff1cd4c0a72fe722d177284d5d2286eeea77d7bf6". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+➜  / docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS    PORTS     NAMES
+dd00085dc61b   docker    "dockerd-entrypoint.…"   7 minutes ago   Created             db
+➜  / docker ps   
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS    PORTS     NAMES
+dd00085dc61b   docker    "dockerd-entrypoint.…"   8 minutes ago   Created             db
+➜  / docker ps   
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / docker ps 
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS    PORTS     NAMES
+dd00085dc61b   docker    "dockerd-entrypoint.…"   10 minutes ago   Created             db
+➜  / docker rmi dd000
+Error: No such image: dd000
+➜  / docker rm dd00
+dd00
+➜  / docker ps -a    
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker run -d --name db --network internal \
+-e MYSQL_ROOT_PASSWORD=my-secret-pw \
+-e MYSQL_USER=wpuser \
+-e MYSQL_PASSWORD=my-secret-pw \
+-e MYSQL_DATABASE=wordpressdb \
+mysql
+2b98a61b44a8a947fd0d5d8f0782ee5f9274c7a4cb731f73930799fe1e1c15ae
+➜  / docker ps                                   
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+2b98a61b44a8   mysql     "docker-entrypoint.s…"   10 seconds ago   Up 10 seconds             db
+➜  / docker network ls
+NETWORK ID     NAME       DRIVER    SCOPE
+e748403dc2f1   bridge     bridge    local
+9ecc94d6b406   host       host      local
+01c9a9745a17   internal   bridge    local
+4aa8cc93504d   none       null      local
+960491ed5678   public     bridge    local
+➜  / docker network inspect internal
+[
+    {
+        "Name": "internal",
+        "Id": "01c9a9745a17053a1a67b9563d6cd561305a16dc499f3469eb832c7396c60c82",
+        "Created": "2025-04-03T05:03:42.548073722Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.21.0.0/16",
+                    "Gateway": "172.21.0.1"
+                }
+            ]
+        },
+        "Internal": true,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "2b98a61b44a8a947fd0d5d8f0782ee5f9274c7a4cb731f73930799fe1e1c15ae": {
+                "Name": "db",
+                "EndpointID": "52950af96df71016c5afc81046113421f712c9742faf8f5c2a07418c91b3da00",
+                "MacAddress": "02:42:ac:15:00:02",
+                "IPv4Address": "172.21.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / docker create -p 8081:80 --name web --network public \
+-e WORDPRESS_DB_HOST=db:3306 \
+-e WORDPRESS_DB_USER=wpuser \
+-e WORDPRESS_DB_PASSWORD=my-secret-pw \
+-e WORDPRESS_DB_NAME=wordpressdb \
+-e WORDPRESS_TABLE_PREFIX=hj \
+wordpress:latest
+7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b
+➜  / docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+2b98a61b44a8   mysql     "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes             db
+➜  / docker ps -a
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS     NAMES
+7cee0bbc5e90   wordpress:latest   "docker-entrypoint.s…"   9 seconds ago    Created                   web
+2b98a61b44a8   mysql              "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes             db
+➜  / docker network connect internal web
+➜  / docker network inspect internal
+[
+    {
+        "Name": "internal",
+        "Id": "01c9a9745a17053a1a67b9563d6cd561305a16dc499f3469eb832c7396c60c82",
+        "Created": "2025-04-03T05:03:42.548073722Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.21.0.0/16",
+                    "Gateway": "172.21.0.1"
+                }
+            ]
+        },
+        "Internal": true,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "2b98a61b44a8a947fd0d5d8f0782ee5f9274c7a4cb731f73930799fe1e1c15ae": {
+                "Name": "db",
+                "EndpointID": "52950af96df71016c5afc81046113421f712c9742faf8f5c2a07418c91b3da00",
+                "MacAddress": "02:42:ac:15:00:02",
+                "IPv4Address": "172.21.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+➜  / docker network inspect public  
+[
+    {
+        "Name": "public",
+        "Id": "960491ed5678180f9e99684ca044391749fcf27093899487be9d2877e0a95d6d",
+        "Created": "2025-04-03T04:54:16.531284293Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+➜  / docker start web
+web
+➜  / docker network inspect internal
+[
+    {
+        "Name": "internal",
+        "Id": "01c9a9745a17053a1a67b9563d6cd561305a16dc499f3469eb832c7396c60c82",
+        "Created": "2025-04-03T05:03:42.548073722Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.21.0.0/16",
+                    "Gateway": "172.21.0.1"
+                }
+            ]
+        },
+        "Internal": true,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "2b98a61b44a8a947fd0d5d8f0782ee5f9274c7a4cb731f73930799fe1e1c15ae": {
+                "Name": "db",
+                "EndpointID": "52950af96df71016c5afc81046113421f712c9742faf8f5c2a07418c91b3da00",
+                "MacAddress": "02:42:ac:15:00:02",
+                "IPv4Address": "172.21.0.2/16",
+                "IPv6Address": ""
+            },
+            "7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b": {
+                "Name": "web",
+                "EndpointID": "15cd5d851c1be849d21b6b7c0f3e835d6c2800e7d8b4b986579a5d6e9bbdc227",
+                "MacAddress": "02:42:ac:15:00:03",
+                "IPv4Address": "172.21.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+➜  / docker network inspect public  
+[
+    {
+        "Name": "public",
+        "Id": "960491ed5678180f9e99684ca044391749fcf27093899487be9d2877e0a95d6d",
+        "Created": "2025-04-03T04:54:16.531284293Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b": {
+                "Name": "web",
+                "EndpointID": "980a95f1a5ce05418536a0fe1d6a7f9e74958524bcc27619259b105e3bc7ba06",
+                "MacAddress": "02:42:ac:12:00:02",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+➜  / docker ps
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS              PORTS                  NAMES
+7cee0bbc5e90   wordpress:latest   "docker-entrypoint.s…"   4 minutes ago    Up About a minute   0.0.0.0:8081->80/tcp   web
+2b98a61b44a8   mysql              "docker-entrypoint.s…"   16 minutes ago   Up 16 minutes                              db
+➜  / docker inspect web
+[
+    {
+        "Id": "7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b",
+        "Created": "2025-04-03T05:50:34.112464801Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "apache2-foreground"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 3301,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2025-04-03T05:54:00.621962174Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:ae04ed0bf053a79e78704c7facb50f90458a8df6a2bc3395a5f6fce1dc87475b",
+        "ResolvConfPath": "/var/lib/docker/containers/7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b/hostname",
+        "HostsPath": "/var/lib/docker/containers/7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b/hosts",
+        "LogPath": "/var/lib/docker/containers/7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b/7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b-json.log",
+        "Name": "/web",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "public",
+            "PortBindings": {
+                "80/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "8081"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/5ac681e274bf1ff97c20807caf050516b1b91de8b6003d931f99c9f68f7ab0f5-init/diff:/var/lib/docker/overlay2/fbc9ba64cca6acf2a1c63092b2fbbe13fc26239cb58309c2e1b704b3f961aca1/diff:/var/lib/docker/overlay2/cd75d3a7000bad84c2373b4709a7b66afcdc765efcc5662f711554ff7c32d5d0/diff:/var/lib/docker/overlay2/a768a1fa60c326ad14490db16b36c487fa4d92ecf9fbe54b6cb69b2d1fdae23d/diff:/var/lib/docker/overlay2/98caf6900e45b3f08a358133f96f0c7bc7756f8b409fefe95d8822e930194bb3/diff:/var/lib/docker/overlay2/fa6c5baee5a6c94af25a5f76fc099640defae15baf523fa5b3e179555d95a23c/diff:/var/lib/docker/overlay2/5c7c45257d30cb3dbfb11f29de39a0890a1d79ef617b28a9839b0413a3190b10/diff:/var/lib/docker/overlay2/fc2aff9e8e02c58ec47d00204151e854d5490fec075350fe84d2e11465415efb/diff:/var/lib/docker/overlay2/025f8238aaef0e1744eaa76fece632f690072819d91cf2e2fea8a9c701586f78/diff:/var/lib/docker/overlay2/d024edad252cbf7c43a38b06ebb33f89428f4db1c5a9e2a027bdd445758e7730/diff:/var/lib/docker/overlay2/e31180015f9869311a35c0a8d9765cc25e98d6d432fdbc410bd22011cfe4b667/diff:/var/lib/docker/overlay2/f1ffc5c8fcff90238dbec77749538b814eb8f587a8d2fe8eac9da5f7954fae79/diff:/var/lib/docker/overlay2/b5e2a1ddbdc9968d4c835956c9230204b908e356e4ab305582140d260b7ee679/diff:/var/lib/docker/overlay2/1c9bb67bac0381e962fb56b43fd8341961fc42bb09fb6932038e0ddf8f7d6754/diff:/var/lib/docker/overlay2/0fce275dfb1b928d35255f3a7f929941c85243a14f760b8ca0dc81781f9ba6b6/diff:/var/lib/docker/overlay2/c8d4a6aee89bc12d437100896947fa2e3d9241f2afed63e67ca027c48cd4a532/diff:/var/lib/docker/overlay2/f4f3c79984b84c9560cb4c2892ef4eb66392c49e988552c8f61488b6f5b53d93/diff:/var/lib/docker/overlay2/9e7b3dddeb170fe7313ad8f8b6783e6f597194f30ce3b3fab3e16e66149c5782/diff:/var/lib/docker/overlay2/829485a66d60b2bec3273674ffb1eb1ffccdb939d8c6b2453ad0f0b0d48dbed7/diff:/var/lib/docker/overlay2/d1cae4cbf5794f4cfda60ffa42937ccfea6209bf556ea49a39d6bff01c6b23bd/diff:/var/lib/docker/overlay2/ff3ffc227913e4c87fe8c2b8ef4752706053f6d342ab0b75ba959d2f91182991/diff:/var/lib/docker/overlay2/d5668b2261e24d93c085ee4fe59ffb4901eb676e70a850fa632cc8ecac271f06/diff:/var/lib/docker/overlay2/334d71c662c4545b9d7c5ea0e547a064dcabe1ec525d653a81375dd123d5593d/diff",
+                "MergedDir": "/var/lib/docker/overlay2/5ac681e274bf1ff97c20807caf050516b1b91de8b6003d931f99c9f68f7ab0f5/merged",
+                "UpperDir": "/var/lib/docker/overlay2/5ac681e274bf1ff97c20807caf050516b1b91de8b6003d931f99c9f68f7ab0f5/diff",
+                "WorkDir": "/var/lib/docker/overlay2/5ac681e274bf1ff97c20807caf050516b1b91de8b6003d931f99c9f68f7ab0f5/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "192a12d269470b7a51f9b8756aed972afc8992bf578e4b0fb7e26dbfa5088150",
+                "Source": "/var/lib/docker/volumes/192a12d269470b7a51f9b8756aed972afc8992bf578e4b0fb7e26dbfa5088150/_data",
+                "Destination": "/var/www/html",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "7cee0bbc5e90",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "WORDPRESS_DB_HOST=db:3306",
+                "WORDPRESS_DB_USER=wpuser",
+                "WORDPRESS_DB_PASSWORD=my-secret-pw",
+                "WORDPRESS_DB_NAME=wordpressdb",
+                "WORDPRESS_TABLE_PREFIX=hj",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "PHPIZE_DEPS=autoconf \t\tdpkg-dev \t\tfile \t\tg++ \t\tgcc \t\tlibc-dev \t\tmake \t\tpkg-config \t\tre2c",
+                "PHP_INI_DIR=/usr/local/etc/php",
+                "APACHE_CONFDIR=/etc/apache2",
+                "APACHE_ENVVARS=/etc/apache2/envvars",
+                "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+                "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
+                "PHP_LDFLAGS=-Wl,-O1 -pie",
+                "GPG_KEYS=39B641343D8C104B2B146DC3F9C39DC0B9698544 E60913E4DF209907D8E30D96659A97C9CF2A795A 1198C0117593497A5EC5C199286AF1F9897469DC",
+                "PHP_VERSION=8.2.28",
+                "PHP_URL=https://www.php.net/distributions/php-8.2.28.tar.xz",
+                "PHP_ASC_URL=https://www.php.net/distributions/php-8.2.28.tar.xz.asc",
+                "PHP_SHA256=af8c9153153a7f489153b7a74f2f29a5ee36f5cb2c6c6929c98411a577e89c91"
+            ],
+            "Cmd": [
+                "apache2-foreground"
+            ],
+            "Image": "wordpress:latest",
+            "Volumes": {
+                "/var/www/html": {}
+            },
+            "WorkingDir": "/var/www/html",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {},
+            "StopSignal": "SIGWINCH"
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "a57948119635c22bd4030fa58c97ba74028452c2abfabf2a7a33f162bd609817",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "80/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "8081"
+                    }
+                ]
+            },
+            "SandboxKey": "/var/run/docker/netns/a57948119635",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "internal": {
+                    "IPAMConfig": {},
+                    "Links": null,
+                    "Aliases": [
+                        "7cee0bbc5e90"
+                    ],
+                    "NetworkID": "01c9a9745a17053a1a67b9563d6cd561305a16dc499f3469eb832c7396c60c82",
+                    "EndpointID": "15cd5d851c1be849d21b6b7c0f3e835d6c2800e7d8b4b986579a5d6e9bbdc227",
+                    "Gateway": "172.21.0.1",
+                    "IPAddress": "172.21.0.3",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:15:00:03",
+                    "DriverOpts": {}
+                },
+                "public": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "7cee0bbc5e90"
+                    ],
+                    "NetworkID": "960491ed5678180f9e99684ca044391749fcf27093899487be9d2877e0a95d6d",
+                    "EndpointID": "980a95f1a5ce05418536a0fe1d6a7f9e74958524bcc27619259b105e3bc7ba06",
+                    "Gateway": "172.18.0.1",
+                    "IPAddress": "172.18.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:12:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+➜  / docker excec db bash
+docker: 'excec' is not a docker command.
+See 'docker --help'
+➜  / docker exec -it db bash
+bash-5.1# ping 172.18.0.2
+bash: ping: command not found
+bash-5.1# ping -h        
+bash: ping: command not found
+bash-5.1# mysql ping 172.18.0.2
+mysql  Ver 9.2.0 for Linux on aarch64 (MySQL Community Server - GPL)
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Usage: mysql [OPTIONS] [database]
+  -?, --help          Display this help and exit.
+  -I, --help          Synonym for -?
+  --auto-rehash       Enable automatic rehashing. One doesn't need to use
+                      'rehash' to get table and field completion, but startup
+                      and reconnecting may take a longer time. Disable with
+                      --disable-auto-rehash.
+                      (Defaults to on; use --skip-auto-rehash to disable.)
+  -A, --no-auto-rehash 
+                      No automatic rehashing. One has to use 'rehash' to get
+                      table and field completion. This gives a quicker start of
+                      mysql and disables rehashing on reconnect.
+  --auto-vertical-output 
+                      Automatically switch to vertical output mode if the
+                      result is wider than the terminal width.
+  -B, --batch         Don't use history file. Disable interactive behavior.
+                      (Enables --silent.)
+  --bind-address=name IP address to bind to.
+  --binary-as-hex     Print binary data as hex. Enabled by default for
+                      interactive terminals.
+  --character-sets-dir=name 
+                      Directory for character set files.
+  --column-type-info  Display column type information.
+  -c, --comments      Preserve comments. Send comments to the server. The
+                      default is --comments (keep comments), disable with
+                      --skip-comments.
+                      (Defaults to on; use --skip-comments to disable.)
+  -C, --compress      Use compression in server/client protocol.
+  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
+  --debug-check       This is a non-debug version. Catch this and exit.
+  -T, --debug-info    This is a non-debug version. Catch this and exit.
+  -D, --database=name Database to use.
+  --default-character-set=name 
+                      Set the default character set.
+  --delimiter=name    Delimiter to be used.
+  --enable-cleartext-plugin 
+                      Enable/disable the clear text authentication plugin.
+  -e, --execute=name  Execute command and quit. (Disables --force and history
+                      file.)
+  -E, --vertical      Print the output of a query (rows) vertically.
+  -f, --force         Continue even if we get an SQL error.
+  --histignore=name   A colon-separated list of patterns to keep statements
+                      from getting logged into syslog and mysql history.
+  -G, --named-commands 
+                      Enable named commands. Named commands mean this program's
+                      internal commands; see mysql> help . When enabled, the
+                      named commands can be used from any line of the query,
+                      otherwise only from the first line, before an enter.
+                      Disable with --disable-named-commands. This option is
+                      disabled by default.
+  -i, --ignore-spaces Ignore space after function names.
+  --init-command=name Single SQL Command to execute when connecting to MySQL
+                      server. Will automatically be re-executed when
+                      reconnecting.
+  --init-command-add=name 
+                      Add SQL command to the list to execute when connecting to
+                      MySQL server. Will automatically be re-executed when
+                      reconnecting.
+  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
+  -b, --no-beep       Turn off beep on error.
+  -h, --host=name     Connect to host.
+  --dns-srv-name=name Connect to a DNS SRV resource
+  -H, --html          Produce HTML output.
+  -X, --xml           Produce XML output.
+  --line-numbers      Write line numbers for errors.
+                      (Defaults to on; use --skip-line-numbers to disable.)
+  -L, --skip-line-numbers 
+                      Don't write line number for errors.
+  -n, --unbuffered    Flush buffer after each query.
+  --column-names      Write column names in results.
+                      (Defaults to on; use --skip-column-names to disable.)
+  -N, --skip-column-names 
+                      Don't write column names in results.
+  --sigint-ignore     Ignore SIGINT (CTRL-C).
+  -o, --one-database  Ignore statements except those that occur while the
+                      default database is the one named at the command line.
+  --pager[=name]      Pager to use to display results. If you don't supply an
+                      option, the default pager is taken from your ENV variable
+                      PAGER. Valid pagers are less, more, cat [> filename],
+                      etc. See interactive help (\h) also. This option does not
+                      work in batch mode. Disable with --disable-pager. This
+                      option is disabled by default.
+  -p, --password[=name] 
+                      Password to use when connecting to server. If password is
+                      not given it's asked from the tty.
+  -,, --password1[=name] 
+                      Password for first factor authentication plugin.
+  -,, --password2[=name] 
+                      Password for second factor authentication plugin.
+  -,, --password3[=name] 
+                      Password for third factor authentication plugin.
+  -P, --port=#        Port number to use for connection or 0 for default to, in
+                      order of preference, my.cnf, $MYSQL_TCP_PORT,
+                      /etc/services, built-in default (3306).
+  --prompt=name       Set the mysql prompt to this value.
+  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
+                      memory).
+  -q, --quick         Don't cache result, print it row by row. This may slow
+                      down the server if the output is suspended. Doesn't use
+                      history file.
+  -r, --raw           Write fields without conversion. Used with --batch.
+  --reconnect         Reconnect if the connection is lost. Disable with
+                      --disable-reconnect. This option is enabled by default.
+                      (Defaults to on; use --skip-reconnect to disable.)
+  -s, --silent        Be more silent. Print results with a tab as separator,
+                      each row on new line.
+  -S, --socket=name   The socket file to use for connection.
+  --server-public-key-path=name 
+                      File path to the server public RSA key in PEM format.
+  --get-server-public-key 
+                      Get server public key
+  --ssl-mode=name     SSL connection mode.
+  --ssl-ca=name       CA file in PEM format.
+  --ssl-capath=name   CA directory.
+  --ssl-cert=name     X509 cert in PEM format.
+  --ssl-cipher=name   SSL cipher to use.
+  --ssl-key=name      X509 key in PEM format.
+  --ssl-crl=name      Certificate revocation list.
+  --ssl-crlpath=name  Certificate revocation list path.
+  --tls-version=name  TLS version to use, permitted values are: TLSv1.2,
+                      TLSv1.3
+  --ssl-fips-mode=name 
+                      SSL FIPS mode (applies only for OpenSSL); permitted
+                      values are: OFF, ON, STRICT
+  --tls-ciphersuites=name 
+                      TLS v1.3 cipher to use.
+  --ssl-session-data=name 
+                      Session data file to use to enable ssl session reuse
+  --ssl-session-data-continue-on-failed-reuse 
+                      If set to ON, this option will allow connection to
+                      succeed even if session data cannot be reused.
+  --tls-sni-servername=name 
+                      The SNI server name to pass to server
+  -t, --table         Output in table format.
+  --tee=name          Append everything into outfile. See interactive help (\h)
+                      also. Does not work in batch mode. Disable with
+                      --disable-tee. This option is disabled by default.
+  -u, --user=name     User for login if not current user.
+  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
+  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
+  -v, --verbose       Write more. (-v -v -v gives the table output format).
+  -V, --version       Output version information and exit.
+  -w, --wait          Wait and retry if connection is down.
+  --connect-timeout=# Number of seconds before connection timeout.
+  --max-allowed-packet=# 
+                      The maximum packet length to send to or receive from
+                      server.
+  --net-buffer-length=# 
+                      The buffer size for TCP/IP and socket communication.
+  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
+  --max-join-size=#   Automatic limit for rows in a join when using
+                      --safe-updates.
+  --show-warnings     Show warnings after every statement.
+  -j, --syslog        Log filtered interactive commands to syslog. Filtering of
+                      commands depends on the patterns supplied via histignore
+                      option besides the default patterns.
+  --plugin-dir=name   Directory for client-side plugins.
+  --default-auth=name Default authentication client-side plugin to use.
+  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
+                      translated to '\n'. This switch turns off both features,
+                      and also turns off parsing of all clientcommands except
+                      \C and DELIMITER, in non-interactive mode (for input
+                      piped to mysql or loaded using the 'source' command).
+                      This is necessary when processing output from mysqlbinlog
+                      that may contain blobs.
+  --connect-expired-password 
+                      Notify the server that this client is prepared to handle
+                      expired password sandbox mode.
+  --network-namespace=name 
+                      Network namespace to use for connection via tcp with a
+                      server.
+  --compression-algorithms=name 
+                      Use compression algorithm in server/client protocol.
+                      Valid values are any combination of
+                      'zstd','zlib','uncompressed'.
+  --zstd-compression-level=# 
+                      Use this compression level in the client/server protocol,
+                      in case --compression-algorithms=zstd. Valid range is
+                      between 1 and 22, inclusive. Default is 3.
+  --load-data-local-dir=name 
+                      Directory path safe for LOAD DATA LOCAL INFILE to read
+                      from.
+  --authentication-oci-client-config-profile=name 
+                      Specifies the configuration profile whose configuration
+                      options are to be read from the OCI configuration file.
+                      Default is DEFAULT.
+  --oci-config-file=name 
+                      Specifies the location of the OCI configuration file.
+                      Default for Linux is ~/.oci/config and %HOME/.oci/config
+                      on Windows.
+  --authentication-openid-connect-client-id-token-file=name 
+                      Specifies the location of the ID token file.
+  --telemetry-client  Load the telemetry_client plugin.
+  --plugin-authentication-webauthn-client-preserve-privacy 
+                      Allows selection of discoverable credential to be used
+                      for signing challenge. default is false - implies
+                      challenge is signed by all credentials for given relying
+                      party.
+  --plugin-authentication-webauthn-device=# 
+                      Specifies what libfido2 device to use. 0 (the first
+                      device) is the default.
+  --register-factor=name 
+                      Specifies factor for which registration needs to be done
+                      for.
+  --system-command    Enable or disable (by default) the 'system' mysql
+                      command.
+
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf 
+The following groups are read: mysql client
+The following options may be given as the first argument:
+--print-defaults        Print the program argument list and exit.
+--no-defaults           Don't read default options from any option file,
+                        except for login file.
+--defaults-file=#       Only read default options from the given file #.
+--defaults-extra-file=# Read this file after the global files are read.
+--defaults-group-suffix=#
+                        Also read groups with concat(group, suffix)
+--login-path=#          Read this path from the login file.
+--no-login-paths        Don't read login paths from the login path file.
+
+Variables (--variable-name=value)
+and boolean options {FALSE|TRUE}                       Value (after reading options)
+------------------------------------------------------ -------------------
+auto-rehash                                            TRUE
+auto-vertical-output                                   FALSE
+bind-address                                           (No default value)
+binary-as-hex                                          TRUE
+character-sets-dir                                     (No default value)
+column-type-info                                       FALSE
+comments                                               TRUE
+compress                                               FALSE
+database                                               (No default value)
+default-character-set                                  auto
+delimiter                                              ;
+enable-cleartext-plugin                                FALSE
+vertical                                               FALSE
+force                                                  FALSE
+histignore                                             (No default value)
+named-commands                                         FALSE
+ignore-spaces                                          FALSE
+local-infile                                           FALSE
+no-beep                                                FALSE
+host                                                   (No default value)
+dns-srv-name                                           (No default value)
+html                                                   FALSE
+xml                                                    FALSE
+line-numbers                                           TRUE
+unbuffered                                             FALSE
+column-names                                           TRUE
+sigint-ignore                                          FALSE
+port                                                   0
+prompt                                                 mysql> 
+quick                                                  FALSE
+raw                                                    FALSE
+reconnect                                              TRUE
+socket                                                 /var/run/mysqld/mysqld.sock
+server-public-key-path                                 (No default value)
+get-server-public-key                                  FALSE
+ssl-ca                                                 (No default value)
+ssl-capath                                             (No default value)
+ssl-cert                                               (No default value)
+ssl-cipher                                             (No default value)
+ssl-key                                                (No default value)
+ssl-crl                                                (No default value)
+ssl-crlpath                                            (No default value)
+tls-version                                            (No default value)
+tls-ciphersuites                                       (No default value)
+ssl-session-data                                       (No default value)
+ssl-session-data-continue-on-failed-reuse              FALSE
+tls-sni-servername                                     (No default value)
+table                                                  FALSE
+user                                                   (No default value)
+safe-updates                                           FALSE
+i-am-a-dummy                                           FALSE
+wait                                                   FALSE
+connect-timeout                                        0
+max-allowed-packet                                     16777216
+net-buffer-length                                      16384
+select-limit                                           1000
+max-join-size                                          1000000
+show-warnings                                          FALSE
+plugin-dir                                             (No default value)
+default-auth                                           (No default value)
+binary-mode                                            FALSE
+connect-expired-password                               FALSE
+network-namespace                                      (No default value)
+compression-algorithms                                 (No default value)
+zstd-compression-level                                 3
+load-data-local-dir                                    (No default value)
+authentication-oci-client-config-profile               (No default value)
+oci-config-file                                        (No default value)
+authentication-openid-connect-client-id-token-file     (No default value)
+telemetry-client                                       FALSE
+plugin-authentication-webauthn-client-preserve-privacy FALSE
+plugin-authentication-webauthn-device                  0
+register-factor                                        (No default value)
+system-command                                         FALSE
+bash-5.1# mysql -h
+mysql: [ERROR] mysql: option '-h' requires an argument.
+bash-5.1# mysql -?
+mysql  Ver 9.2.0 for Linux on aarch64 (MySQL Community Server - GPL)
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Usage: mysql [OPTIONS] [database]
+  -?, --help          Display this help and exit.
+  -I, --help          Synonym for -?
+  --auto-rehash       Enable automatic rehashing. One doesn't need to use
+                      'rehash' to get table and field completion, but startup
+                      and reconnecting may take a longer time. Disable with
+                      --disable-auto-rehash.
+                      (Defaults to on; use --skip-auto-rehash to disable.)
+  -A, --no-auto-rehash 
+                      No automatic rehashing. One has to use 'rehash' to get
+                      table and field completion. This gives a quicker start of
+                      mysql and disables rehashing on reconnect.
+  --auto-vertical-output 
+                      Automatically switch to vertical output mode if the
+                      result is wider than the terminal width.
+  -B, --batch         Don't use history file. Disable interactive behavior.
+                      (Enables --silent.)
+  --bind-address=name IP address to bind to.
+  --binary-as-hex     Print binary data as hex. Enabled by default for
+                      interactive terminals.
+  --character-sets-dir=name 
+                      Directory for character set files.
+  --column-type-info  Display column type information.
+  -c, --comments      Preserve comments. Send comments to the server. The
+                      default is --comments (keep comments), disable with
+                      --skip-comments.
+                      (Defaults to on; use --skip-comments to disable.)
+  -C, --compress      Use compression in server/client protocol.
+  -#, --debug[=#]     This is a non-debug version. Catch this and exit.
+  --debug-check       This is a non-debug version. Catch this and exit.
+  -T, --debug-info    This is a non-debug version. Catch this and exit.
+  -D, --database=name Database to use.
+  --default-character-set=name 
+                      Set the default character set.
+  --delimiter=name    Delimiter to be used.
+  --enable-cleartext-plugin 
+                      Enable/disable the clear text authentication plugin.
+  -e, --execute=name  Execute command and quit. (Disables --force and history
+                      file.)
+  -E, --vertical      Print the output of a query (rows) vertically.
+  -f, --force         Continue even if we get an SQL error.
+  --histignore=name   A colon-separated list of patterns to keep statements
+                      from getting logged into syslog and mysql history.
+  -G, --named-commands 
+                      Enable named commands. Named commands mean this program's
+                      internal commands; see mysql> help . When enabled, the
+                      named commands can be used from any line of the query,
+                      otherwise only from the first line, before an enter.
+                      Disable with --disable-named-commands. This option is
+                      disabled by default.
+  -i, --ignore-spaces Ignore space after function names.
+  --init-command=name Single SQL Command to execute when connecting to MySQL
+                      server. Will automatically be re-executed when
+                      reconnecting.
+  --init-command-add=name 
+                      Add SQL command to the list to execute when connecting to
+                      MySQL server. Will automatically be re-executed when
+                      reconnecting.
+  --local-infile      Enable/disable LOAD DATA LOCAL INFILE.
+  -b, --no-beep       Turn off beep on error.
+  -h, --host=name     Connect to host.
+  --dns-srv-name=name Connect to a DNS SRV resource
+  -H, --html          Produce HTML output.
+  -X, --xml           Produce XML output.
+  --line-numbers      Write line numbers for errors.
+                      (Defaults to on; use --skip-line-numbers to disable.)
+  -L, --skip-line-numbers 
+                      Don't write line number for errors.
+  -n, --unbuffered    Flush buffer after each query.
+  --column-names      Write column names in results.
+                      (Defaults to on; use --skip-column-names to disable.)
+  -N, --skip-column-names 
+                      Don't write column names in results.
+  --sigint-ignore     Ignore SIGINT (CTRL-C).
+  -o, --one-database  Ignore statements except those that occur while the
+                      default database is the one named at the command line.
+  --pager[=name]      Pager to use to display results. If you don't supply an
+                      option, the default pager is taken from your ENV variable
+                      PAGER. Valid pagers are less, more, cat [> filename],
+                      etc. See interactive help (\h) also. This option does not
+                      work in batch mode. Disable with --disable-pager. This
+                      option is disabled by default.
+  -p, --password[=name] 
+                      Password to use when connecting to server. If password is
+                      not given it's asked from the tty.
+  -,, --password1[=name] 
+                      Password for first factor authentication plugin.
+  -,, --password2[=name] 
+                      Password for second factor authentication plugin.
+  -,, --password3[=name] 
+                      Password for third factor authentication plugin.
+  -P, --port=#        Port number to use for connection or 0 for default to, in
+                      order of preference, my.cnf, $MYSQL_TCP_PORT,
+                      /etc/services, built-in default (3306).
+  --prompt=name       Set the mysql prompt to this value.
+  --protocol=name     The protocol to use for connection (tcp, socket, pipe,
+                      memory).
+  -q, --quick         Don't cache result, print it row by row. This may slow
+                      down the server if the output is suspended. Doesn't use
+                      history file.
+  -r, --raw           Write fields without conversion. Used with --batch.
+  --reconnect         Reconnect if the connection is lost. Disable with
+                      --disable-reconnect. This option is enabled by default.
+                      (Defaults to on; use --skip-reconnect to disable.)
+  -s, --silent        Be more silent. Print results with a tab as separator,
+                      each row on new line.
+  -S, --socket=name   The socket file to use for connection.
+  --server-public-key-path=name 
+                      File path to the server public RSA key in PEM format.
+  --get-server-public-key 
+                      Get server public key
+  --ssl-mode=name     SSL connection mode.
+  --ssl-ca=name       CA file in PEM format.
+  --ssl-capath=name   CA directory.
+  --ssl-cert=name     X509 cert in PEM format.
+  --ssl-cipher=name   SSL cipher to use.
+  --ssl-key=name      X509 key in PEM format.
+  --ssl-crl=name      Certificate revocation list.
+  --ssl-crlpath=name  Certificate revocation list path.
+  --tls-version=name  TLS version to use, permitted values are: TLSv1.2,
+                      TLSv1.3
+  --ssl-fips-mode=name 
+                      SSL FIPS mode (applies only for OpenSSL); permitted
+                      values are: OFF, ON, STRICT
+  --tls-ciphersuites=name 
+                      TLS v1.3 cipher to use.
+  --ssl-session-data=name 
+                      Session data file to use to enable ssl session reuse
+  --ssl-session-data-continue-on-failed-reuse 
+                      If set to ON, this option will allow connection to
+                      succeed even if session data cannot be reused.
+  --tls-sni-servername=name 
+                      The SNI server name to pass to server
+  -t, --table         Output in table format.
+  --tee=name          Append everything into outfile. See interactive help (\h)
+                      also. Does not work in batch mode. Disable with
+                      --disable-tee. This option is disabled by default.
+  -u, --user=name     User for login if not current user.
+  -U, --safe-updates  Only allow UPDATE and DELETE that uses keys.
+  -U, --i-am-a-dummy  Synonym for option --safe-updates, -U.
+  -v, --verbose       Write more. (-v -v -v gives the table output format).
+  -V, --version       Output version information and exit.
+  -w, --wait          Wait and retry if connection is down.
+  --connect-timeout=# Number of seconds before connection timeout.
+  --max-allowed-packet=# 
+                      The maximum packet length to send to or receive from
+                      server.
+  --net-buffer-length=# 
+                      The buffer size for TCP/IP and socket communication.
+  --select-limit=#    Automatic limit for SELECT when using --safe-updates.
+  --max-join-size=#   Automatic limit for rows in a join when using
+                      --safe-updates.
+  --show-warnings     Show warnings after every statement.
+  -j, --syslog        Log filtered interactive commands to syslog. Filtering of
+                      commands depends on the patterns supplied via histignore
+                      option besides the default patterns.
+  --plugin-dir=name   Directory for client-side plugins.
+  --default-auth=name Default authentication client-side plugin to use.
+  --binary-mode       By default, ASCII '\0' is disallowed and '\r\n' is
+                      translated to '\n'. This switch turns off both features,
+                      and also turns off parsing of all clientcommands except
+                      \C and DELIMITER, in non-interactive mode (for input
+                      piped to mysql or loaded using the 'source' command).
+                      This is necessary when processing output from mysqlbinlog
+                      that may contain blobs.
+  --connect-expired-password 
+                      Notify the server that this client is prepared to handle
+                      expired password sandbox mode.
+  --network-namespace=name 
+                      Network namespace to use for connection via tcp with a
+                      server.
+  --compression-algorithms=name 
+                      Use compression algorithm in server/client protocol.
+                      Valid values are any combination of
+                      'zstd','zlib','uncompressed'.
+  --zstd-compression-level=# 
+                      Use this compression level in the client/server protocol,
+                      in case --compression-algorithms=zstd. Valid range is
+                      between 1 and 22, inclusive. Default is 3.
+  --load-data-local-dir=name 
+                      Directory path safe for LOAD DATA LOCAL INFILE to read
+                      from.
+  --authentication-oci-client-config-profile=name 
+                      Specifies the configuration profile whose configuration
+                      options are to be read from the OCI configuration file.
+                      Default is DEFAULT.
+  --oci-config-file=name 
+                      Specifies the location of the OCI configuration file.
+                      Default for Linux is ~/.oci/config and %HOME/.oci/config
+                      on Windows.
+  --authentication-openid-connect-client-id-token-file=name 
+                      Specifies the location of the ID token file.
+  --telemetry-client  Load the telemetry_client plugin.
+  --plugin-authentication-webauthn-client-preserve-privacy 
+                      Allows selection of discoverable credential to be used
+                      for signing challenge. default is false - implies
+                      challenge is signed by all credentials for given relying
+                      party.
+  --plugin-authentication-webauthn-device=# 
+                      Specifies what libfido2 device to use. 0 (the first
+                      device) is the default.
+  --register-factor=name 
+                      Specifies factor for which registration needs to be done
+                      for.
+  --system-command    Enable or disable (by default) the 'system' mysql
+                      command.
+
+Default options are read from the following files in the given order:
+/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf 
+The following groups are read: mysql client
+The following options may be given as the first argument:
+--print-defaults        Print the program argument list and exit.
+--no-defaults           Don't read default options from any option file,
+                        except for login file.
+--defaults-file=#       Only read default options from the given file #.
+--defaults-extra-file=# Read this file after the global files are read.
+--defaults-group-suffix=#
+                        Also read groups with concat(group, suffix)
+--login-path=#          Read this path from the login file.
+--no-login-paths        Don't read login paths from the login path file.
+
+Variables (--variable-name=value)
+and boolean options {FALSE|TRUE}                       Value (after reading options)
+------------------------------------------------------ -------------------
+auto-rehash                                            TRUE
+auto-vertical-output                                   FALSE
+bind-address                                           (No default value)
+binary-as-hex                                          FALSE
+character-sets-dir                                     (No default value)
+column-type-info                                       FALSE
+comments                                               TRUE
+compress                                               FALSE
+database                                               (No default value)
+default-character-set                                  auto
+delimiter                                              ;
+enable-cleartext-plugin                                FALSE
+vertical                                               FALSE
+force                                                  FALSE
+histignore                                             (No default value)
+named-commands                                         FALSE
+ignore-spaces                                          FALSE
+local-infile                                           FALSE
+no-beep                                                FALSE
+host                                                   (No default value)
+dns-srv-name                                           (No default value)
+html                                                   FALSE
+xml                                                    FALSE
+line-numbers                                           TRUE
+unbuffered                                             FALSE
+column-names                                           TRUE
+sigint-ignore                                          FALSE
+port                                                   0
+prompt                                                 mysql> 
+quick                                                  FALSE
+raw                                                    FALSE
+reconnect                                              TRUE
+socket                                                 /var/run/mysqld/mysqld.sock
+server-public-key-path                                 (No default value)
+get-server-public-key                                  FALSE
+ssl-ca                                                 (No default value)
+ssl-capath                                             (No default value)
+ssl-cert                                               (No default value)
+ssl-cipher                                             (No default value)
+ssl-key                                                (No default value)
+ssl-crl                                                (No default value)
+ssl-crlpath                                            (No default value)
+tls-version                                            (No default value)
+tls-ciphersuites                                       (No default value)
+ssl-session-data                                       (No default value)
+ssl-session-data-continue-on-failed-reuse              FALSE
+tls-sni-servername                                     (No default value)
+table                                                  FALSE
+user                                                   (No default value)
+safe-updates                                           FALSE
+i-am-a-dummy                                           FALSE
+wait                                                   FALSE
+connect-timeout                                        0
+max-allowed-packet                                     16777216
+net-buffer-length                                      16384
+select-limit                                           1000
+max-join-size                                          1000000
+show-warnings                                          FALSE
+plugin-dir                                             (No default value)
+default-auth                                           (No default value)
+binary-mode                                            FALSE
+connect-expired-password                               FALSE
+network-namespace                                      (No default value)
+compression-algorithms                                 (No default value)
+zstd-compression-level                                 3
+load-data-local-dir                                    (No default value)
+authentication-oci-client-config-profile               (No default value)
+oci-config-file                                        (No default value)
+authentication-openid-connect-client-id-token-file     (No default value)
+telemetry-client                                       FALSE
+plugin-authentication-webauthn-client-preserve-privacy FALSE
+plugin-authentication-webauthn-device                  0
+register-factor                                        (No default value)
+system-command                                         FALSE
+bash-5.1# mysqladmin -h 172.18.0.2  -u root -p ping
+Enter password: 
+
+my-secret-pw
+
+
+
+ping
+^C
+
+exit
+
+
+
+^Cmysqladmin: connect to server at '172.18.0.2' failed
+error: 'Can't connect to MySQL server on '172.18.0.2:3306' (4)'
+Check that mysqld is running on 172.18.0.2 and that the port is 3306.
+You can check this by doing 'telnet 172.18.0.2 3306'
+bash-5.1# 
+bash-5.1# 
+bash-5.1# exit
+exit
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / 
+➜  / docker ps
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                  NAMES
+7cee0bbc5e90   wordpress:latest   "docker-entrypoint.s…"   20 minutes ago   Up 17 minutes   0.0.0.0:8081->80/tcp   web
+2b98a61b44a8   mysql              "docker-entrypoint.s…"   32 minutes ago   Up 32 minutes                          db
+➜  / docker rm 7cee
+Error response from daemon: You cannot remove a running container 7cee0bbc5e90ba0aeba0aeb32cd07a73f5f2c6201838e854f30ad445305ff77b. Stop the container before attempting removal or force remove
+➜  / docker rm 2b9 
+Error response from daemon: You cannot remove a running container 2b98a61b44a8a947fd0d5d8f0782ee5f9274c7a4cb731f73930799fe1e1c15ae. Stop the container before attempting removal or force remove
+➜  / docker ps     
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS          PORTS                  NAMES
+7cee0bbc5e90   wordpress:latest   "docker-entrypoint.s…"   20 minutes ago   Up 17 minutes   0.0.0.0:8081->80/tcp   web
+2b98a61b44a8   mysql              "docker-entrypoint.s…"   32 minutes ago   Up 32 minutes                          db
+➜  / docker stop 7cee
+7cee
+➜  / docker stop 2b98
+2b98
+➜  / docker ps       
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  / docker ps -a
+CONTAINER ID   IMAGE              COMMAND                  CREATED          STATUS                      PORTS     NAMES
+7cee0bbc5e90   wordpress:latest   "docker-entrypoint.s…"   21 minutes ago   Exited (0) 15 seconds ago             web
+2b98a61b44a8   mysql              "docker-entrypoint.s…"   33 minutes ago   Exited (0) 5 seconds ago              db
+➜  / 
